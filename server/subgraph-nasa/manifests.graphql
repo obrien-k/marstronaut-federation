@@ -1,0 +1,29 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+
+type Query {
+  "Retrieves manifest info based on rover name"
+  Manifest(name: String!): Manifest!
+
+  "Retrieves the astronomy photo of the day"
+  Apod: Apod
+}
+
+type Manifest {
+  photo_manifest: Photo_Manifest
+}
+
+type Apod {
+  url: String
+}
+
+type Photo_Manifest {
+  name: String
+  landing_date: String
+  launch_date: String
+  status: String
+  max_sol: String
+  max_date: String
+  total_photos: Int
+}

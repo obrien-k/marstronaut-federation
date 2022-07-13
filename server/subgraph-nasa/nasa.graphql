@@ -1,0 +1,58 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+
+type Query {
+  "Retrieves manifest info based on rover name"
+  Manifest(name: String!): Manifest!
+  "Retrieves photos from a rover for a specific day"
+  Photolist(rover_name: String!, earth_date: String!): Photolist
+  "Retrieves the astronomy photo of the day"
+  Apod: Apod
+}
+
+type Manifest {
+  photo_manifest: Photo_Manifest
+}
+
+type Photo_Manifest {
+  "Name of the rover"
+  name: String
+  "Date when the rover landed on Mars"
+  landing_date: String
+  "Date when the rover launched from Earth"
+  launch_date: String
+  "Mission status of the rover"
+  status: String
+  "The most recent Martian sol from which photos exist"
+  max_sol: String
+  "The most recent Earth date from which photos exist"
+  max_date: String
+  "Number of photos taken by the rover"
+  total_photos: Int
+  photos: [Photos!]!
+}
+
+type Photos {
+  sol: Int
+  earth_date: String
+  total_photos: Int
+  cameras: [String]
+}
+
+type Photolist {
+  photos: [Photo_Details]
+}
+
+type Photo_Details {
+  img_src: String
+}
+
+"Astronomy photo of the day"
+type Apod {
+  "Image URL"
+  url: String
+  "High definition image URL"
+  hdurl: String
+}
+

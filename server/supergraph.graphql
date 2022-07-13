@@ -4,7 +4,6 @@ schema
   @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
 {
   query: Query
-  mutation: Mutation
 }
 
 directive @join__field(graph: join__Graph!, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
@@ -17,11 +16,20 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
+type Apod
+  @join__type(graph: NASA)
+{
+  """Image URL"""
+  url: String
+
+  """High definition image URL"""
+  hdurl: String
+}
+
 scalar join__FieldSet
 
 enum join__Graph {
-  LOCATIONS @join__graph(name: "locations", url: "https://flyby-locations-sub.herokuapp.com/")
-  REVIEWS @join__graph(name: "reviews", url: "https://flyby-reviews-sub.herokuapp.com/")
+  NASA @join__graph(name: "nasa", url: "http://localhost:4001/")
 }
 
 scalar link__Import
@@ -38,90 +46,43 @@ enum link__Purpose {
   EXECUTION
 }
 
-type Location
-  @join__type(graph: LOCATIONS, key: "id")
-  @join__type(graph: REVIEWS, key: "id")
+type Manifest
+  @join__type(graph: NASA)
 {
-  id: ID!
-
-  """The name of the location"""
-  name: String! @join__field(graph: LOCATIONS)
-
-  """A short description about the location"""
-  description: String! @join__field(graph: LOCATIONS)
-
-  """The location's main photo as a URL"""
-  photo: String! @join__field(graph: LOCATIONS)
-
-  """The calculated overall rating based on all reviews"""
-  overallRating: Float @join__field(graph: REVIEWS)
-
-  """All submitted reviews about this location"""
-  reviewsForLocation: [Review]! @join__field(graph: REVIEWS)
+  photo_manifest: Photo_Manifest
 }
 
-input LocationReviewInput
-  @join__type(graph: REVIEWS)
+type Photo_Manifest
+  @join__type(graph: NASA)
 {
-  """Written text"""
-  comment: String!
+  """Name of the rover"""
+  name: String
 
-  """A number from 1 - 5 with 1 being lowest and 5 being highest"""
-  rating: Int!
+  """Date when the rover landed on Mars"""
+  landing_date: String
 
-  """Location Id"""
-  locationId: String!
-}
+  """Date when the rover launched from Earth"""
+  launch_date: String
 
-type Mutation
-  @join__type(graph: REVIEWS)
-{
-  submitReview(locationReview: LocationReviewInput): SubmitReviewResponse
+  """Mission status of the rover"""
+  status: String
+
+  """The most recent Martian sol from which photos exist"""
+  max_sol: String
+
+  """The most recent Earth date from which photos exist"""
+  max_date: String
+
+  """Number of photos taken by the rover"""
+  total_photos: Int
 }
 
 type Query
-  @join__type(graph: LOCATIONS)
-  @join__type(graph: REVIEWS)
+  @join__type(graph: NASA)
 {
-  """
-  The full list of locations presented by the Interplanetary Space Tourism department
-  """
-  locations: [Location!]! @join__field(graph: LOCATIONS)
+  """Retrieves manifest info based on rover name"""
+  Manifest(name: String!): Manifest!
 
-  """The details of a specific location"""
-  location(id: ID!): Location @join__field(graph: LOCATIONS)
-
-  """The three latest reviews submitted for FlyBy's locations"""
-  latestReviews: [Review!]! @join__field(graph: REVIEWS)
-}
-
-type Review
-  @join__type(graph: REVIEWS)
-{
-  id: ID!
-
-  """Written text"""
-  comment: String
-
-  """A number from 1 - 5 with 1 being lowest and 5 being highest"""
-  rating: Int
-
-  """The location the review is about"""
-  location: Location
-}
-
-type SubmitReviewResponse
-  @join__type(graph: REVIEWS)
-{
-  """Similar to HTTP status code, represents the status of the mutation"""
-  code: Int!
-
-  """Indicates whether the mutation was successful"""
-  success: Boolean!
-
-  """Human-readable message for the UI"""
-  message: String!
-
-  """Newly created review"""
-  locationReview: Review
+  """Retrieves the astronomy photo of the day"""
+  Apod: Apod
 }

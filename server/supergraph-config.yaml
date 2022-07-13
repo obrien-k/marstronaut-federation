@@ -1,14 +1,6 @@
 federation_version: 2
 subgraphs:
-  locations:
-    routing_url: https://flyby-locations-sub.herokuapp.com/
+  nasa:
+    routing_url: http://localhost:4001/
     schema:
-      subgraph_url: https://flyby-locations-sub.herokuapp.com/
-  reviews:
-    routing_url: https://flyby-reviews-sub.herokuapp.com/
-    schema:
-      subgraph_url: https://flyby-reviews-sub.herokuapp.com/
-  manifests:
-    routing_url: http://localhost:4000/
-    schema:
-      subgraph_url: http://localhost:4000/
+      subgraph_url: http://localhost:4001/

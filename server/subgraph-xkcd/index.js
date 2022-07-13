@@ -2,21 +2,21 @@ const {ApolloServer, gql} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync('./nasa.graphql', {encoding: 'utf-8'}));
+const typeDefs = gql(readFileSync('./xkcd.graphql', {encoding: 'utf-8'}));
 const resolvers = require('./resolvers');
-const NasaAPI = require('./datasources/NasaApi');
+const XkcdAPI = require('./datasources/XkcdApi');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      nasaAPI: new NasaAPI()
+      xkcdAPI: new XkcdAPI()
     };
   }
 });
 
-const port = 4001;
-const subgraphName = 'nasa';
+const port = 4002;
+const subgraphName = 'xkcd';
 
 server
   .listen({port})

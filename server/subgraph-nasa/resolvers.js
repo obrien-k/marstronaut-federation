@@ -10,6 +10,11 @@ const resolvers = {
     Apod: (_, __, {dataSources}) => {
       return dataSources.nasaAPI.getApod();
     }
+  },
+  Photo_Details: {
+    totally: () => {
+      return {id: 141592};
+    }
   }
 
 };

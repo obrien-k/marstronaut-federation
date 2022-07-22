@@ -5,6 +5,8 @@ extend schema
 type Query {
   "Retrieves comic info based on comic number"
   Comic(comic_number: Int!): Comic
+  "totally cool"
+  totally: totally
 }
 
 type Comic {
@@ -12,4 +14,9 @@ type Comic {
   day: String!
   year: String!
   alt: String!
+}
+
+type totally @key(fields: "id") {
+  id: ID!,
+  cool: Boolean
 }

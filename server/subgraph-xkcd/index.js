@@ -5,12 +5,14 @@ const {buildSubgraphSchema} = require('@apollo/subgraph');
 const typeDefs = gql(readFileSync('./xkcd.graphql', {encoding: 'utf-8'}));
 const resolvers = require('./resolvers');
 const XkcdAPI = require('./datasources/XkcdApi');
+const TotallySource = require('./datasources/totally');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      xkcdAPI: new XkcdAPI()
+      xkcdAPI: new XkcdAPI(),
+      totallySource: new TotallySource()
     };
   }
 });

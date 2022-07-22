@@ -16,6 +16,7 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
+"""Astronomy photo of the day"""
 type Apod
   @join__type(graph: NASA)
 {
@@ -26,10 +27,20 @@ type Apod
   hdurl: String
 }
 
+type Comic
+  @join__type(graph: XKCD)
+{
+  month: String!
+  day: String!
+  year: String!
+  alt: String!
+}
+
 scalar join__FieldSet
 
 enum join__Graph {
   NASA @join__graph(name: "nasa", url: "http://localhost:4001/")
+  XKCD @join__graph(name: "xkcd", url: "http://localhost:4002/")
 }
 
 scalar link__Import
@@ -50,6 +61,13 @@ type Manifest
   @join__type(graph: NASA)
 {
   photo_manifest: Photo_Manifest
+}
+
+type Photo_Details
+  @join__type(graph: NASA)
+{
+  img_src: String
+  totally: totally
 }
 
 type Photo_Manifest
@@ -75,14 +93,48 @@ type Photo_Manifest
 
   """Number of photos taken by the rover"""
   total_photos: Int
+  photos: [Photos!]!
+}
+
+type Photolist
+  @join__type(graph: NASA)
+{
+  photos: [Photo_Details]
+}
+
+type Photos
+  @join__type(graph: NASA)
+{
+  sol: Int
+  earth_date: String
+  total_photos: Int
+  cameras: [String]
 }
 
 type Query
   @join__type(graph: NASA)
+  @join__type(graph: XKCD)
 {
   """Retrieves manifest info based on rover name"""
-  Manifest(name: String!): Manifest!
+  Manifest(name: String!): Manifest! @join__field(graph: NASA)
+
+  """Retrieves photos from a rover for a specific day"""
+  Photolist(rover_name: String!, earth_date: String!): Photolist @join__field(graph: NASA)
 
   """Retrieves the astronomy photo of the day"""
-  Apod: Apod
+  Apod: Apod @join__field(graph: NASA)
+
+  """Retrieves comic info based on comic number"""
+  Comic(comic_number: Int!): Comic @join__field(graph: XKCD)
+
+  """totally cool"""
+  totally: totally @join__field(graph: XKCD)
+}
+
+type totally
+  @join__type(graph: NASA, key: "id", resolvable: false)
+  @join__type(graph: XKCD, key: "id")
+{
+  id: ID!
+  cool: Boolean @join__field(graph: XKCD)
 }

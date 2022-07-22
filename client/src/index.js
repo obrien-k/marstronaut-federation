@@ -6,21 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://flyby-gateway.herokuapp.com/',
+  uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
 });
+
+
 
 client
   .query({
     query: gql`
-      query GetLocations {
-        locations {
-          id
-          name
-          description
-          photo
-        }
+    query apod{
+      Apod {
+        url
+        hdurl
       }
+    }
     `,
   })
   .then((result) => console.log(result));

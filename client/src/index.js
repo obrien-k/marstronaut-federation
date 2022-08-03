@@ -10,7 +10,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
+document.body.style = 'background: #333;';
 
 client
   .query({

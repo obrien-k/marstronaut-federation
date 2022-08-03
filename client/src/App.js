@@ -4,9 +4,8 @@ import NasaPhotoData from './components/nasa';
 
 export default function App() {
   return (
-    <div style={{backgroundColor:'#333'}}>
+    <div>
       <XkcdData />
-      <br/>
     </div>
   );
 }

@@ -60,3 +60,9 @@ type Apod {
 type totally @key(fields: "id", resolvable:false) {
   id: ID!
 }
+
+"Names of Mars Rovers"
+enum MarsRover {
+  "Deployed in April 2006"
+  Curiosity
+}

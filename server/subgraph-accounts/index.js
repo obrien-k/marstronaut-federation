@@ -2,22 +2,18 @@ const {ApolloServer, gql} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync('./xkcd.graphql', {encoding: 'utf-8'}));
+const typeDefs = gql(readFileSync('./accounts.graphql', {encoding: 'utf-8'}));
 const resolvers = require('./resolvers');
-const XkcdAPI = require('./datasources/XkcdApi');
 const TotallySource = require('./datasources/totally');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      xkcdAPI: new XkcdAPI(),
       totallySource: new TotallySource()
     };
   },
   context: async ({req}) => {
-    console.log(req)
-    console.log(req.headers)
     const token = req.headers.authorization || ''; // e.g., "Bearer user-1"
     // Get the user token after "Bearer "
     const id = token.split(' ')[1]; // e.g., "user-1"
@@ -31,8 +27,8 @@ const server = new ApolloServer({
   }
 });
 
-const port = 4002;
-const subgraphName = 'xkcd';
+const port = 4003;
+const subgraphName = 'accounts';
 
 server
   .listen({port})

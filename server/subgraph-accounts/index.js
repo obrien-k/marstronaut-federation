@@ -4,13 +4,13 @@ const {buildSubgraphSchema} = require('@apollo/subgraph');
 
 const typeDefs = gql(readFileSync('./accounts.graphql', {encoding: 'utf-8'}));
 const resolvers = require('./resolvers');
-const TotallySource = require('./datasources/totally');
+const AccountSource = require('./datasources/accounts');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),
   dataSources: () => {
     return {
-      totallySource: new TotallySource()
+      AccountSource: new AccountSource()
     };
   },
   context: async ({req}) => {

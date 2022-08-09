@@ -3,8 +3,8 @@ const { AuthenticationError } = require("apollo-server");
 const resolvers = {
   Query: {
     // returns account A&A
-    totally: async (_, __, context) => {
-      console.log(context.userId);
+    account: async (_, {id}, context) => {
+    /*  console.log(context.userId);
       if(!context.user) throw new AuthenticationError("authErrMessage");
       if(context.userId == '141592') {
         console.log("yay");
@@ -12,14 +12,17 @@ const resolvers = {
       else {
         console.log("noo");
       }
-      console.log(userId);
-      return context.dataSources.totallySource.getTotally();
+      console.log(userId); */
+      return context.dataSources.AccountSource.getAccount(id);
  
     },
+    accounts: async (_, __, {dataSources}) => {
+      return dataSources.AccountSource.getAccounts();
+    }
   },
-  totally: {
+  account: {
     __resolveReference: ({id}, {dataSources}) => {
-      return dataSources.totallySource.getTotally(id);
+      return dataSources.AccountSource.getAccounts(id);
     }
   }
 

@@ -7,11 +7,13 @@ type Query {
   #Comic(comic_number: Int!): Comic
   #"Return logged in user"
   #me
-  "totally cool"
-  totally: totally
+  "accounts"
+  accounts: [account]
+  "1 acct"
+  account(id: ID!): account
 }
 
-type totally @key(fields: "id") {
+type account @key(fields: "id") {
   id: ID!,
-  cool: Boolean
+  role: String!
 }

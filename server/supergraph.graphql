@@ -132,10 +132,10 @@ type Query
   @join__type(graph: NASA)
   @join__type(graph: XKCD)
 {
-  """accounts"""
+  """Returns all accounts"""
   accounts: [account] @join__field(graph: ACCOUNTS)
 
-  """1 acct"""
+  """Find one account based on ID"""
   account(id: ID!): account @join__field(graph: ACCOUNTS)
 
   """Retrieves manifest info based on rover name"""

@@ -20,7 +20,7 @@ const server = new ApolloServer({
     if (id) { // clean this up, assign userId to a var and start using real data
       return {user: {userId: id, userRole:req.headers.userrole}}
     }
-    if (id = '') throw new AuthenticationError('You must be logged in');
+    //if (!id) throw new AuthenticationError('You must be logged in');
   }
 });
 

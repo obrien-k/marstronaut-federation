@@ -4,7 +4,7 @@ const { ApolloGateway, RemoteGraphQLDataSource } = require('@apollo/gateway');
 const { buildSubgraphSchema } = require('@apollo/subgraph');
 const { readFileSync } = require('fs');
 
-const supergraphSdl = readFileSync('./supergraph.graphql').toString();
+const supergraphSdl = readFileSync(__dirname + '/supergraph.graphql').toString();
 
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
   willSendRequest({ request, context }) {

@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/obrien-k/marstronaut-federation.git"
   },
-  "author": "",
+  "author": "Kyle OBrien",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/obrien-k/marstronaut-federation/issues"

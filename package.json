@@ -9,7 +9,8 @@
     "server": "node ./server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"node .\/server\/subgraph-accounts\/index\" \"node .\/subgraph-nasa\/index\" \"node .\/server\/subgraph-xkcd\/index\" ",
-    "prod": "node ./server"
+    "prod": "node ./server",
+    "accounts-subgraph-publish":"rover subgraph publish Marstronaut@dev --name accounts --schema ./server/subgraph-accounts/accounts.graphql --routing-url http://localhost:4003"
   },
   "repository": {
     "type": "git",

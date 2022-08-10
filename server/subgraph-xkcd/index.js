@@ -21,7 +21,7 @@ const port = 4002;
 const subgraphName = 'xkcd';
 
 server
-  .listen({port})
+  .listen({ port: process.env.PORT || port })
   .then(({url}) => {
     console.log(`🚀 Subgraph ${subgraphName} running at ${url}`);
   })

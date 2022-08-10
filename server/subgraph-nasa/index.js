@@ -19,7 +19,7 @@ const port = 4001;
 const subgraphName = 'nasa';
 
 server
-  .listen({port})
+  .listen({ port: process.env.PORT || port })
   .then(({url}) => {
     console.log(`🚀 Subgraph ${subgraphName} running at ${url}`);
   })

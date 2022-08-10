@@ -1,4 +1,4 @@
-const {ApolloServer, gql} = require('apollo-server');
+const {ApolloServer, gql, AuthenticationError} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
@@ -14,16 +14,13 @@ const server = new ApolloServer({
     };
   },
   context: async ({req}) => {
-    const token = req.headers.authorization || ''; // e.g., "Bearer user-1"
+    const id = req.headers.userid || ''; // e.g., "Bearer user-1"
     // Get the user token after "Bearer "
-    const id = token.split(' ')[1]; // e.g., "user-1"
-    if (req.headers.userId) { // clean this up, assign userId to a var and start using real data
-      return {user: {userId: id, userRole:"test"}}
+    //const id = token.split(' ')[1]; // e.g., "user-1"
+    if (id) { // clean this up, assign userId to a var and start using real data
+      return {user: {userId: id, userRole:req.headers.userrole}}
     }
-    //if (!id) throw new AuthenticationError('You must be logged in');
-    else {
-      return {userId: "nonce"}
-    }
+    if (id = '') throw new AuthenticationError('You must be logged in');
   }
 });
 

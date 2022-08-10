@@ -4,8 +4,8 @@ const resolvers = {
   Query: {
     // returns account A&A
     account: async (_, {id}, context) => {
-    /*  console.log(context.userId);
-      if(!context.user) throw new AuthenticationError("authErrMessage");
+     console.log(context.user);
+     /* if(!context.user) throw new AuthenticationError("authErrMessage");
       if(context.userId == '141592') {
         console.log("yay");
       }

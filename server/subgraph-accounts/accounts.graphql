@@ -3,13 +3,9 @@ extend schema
         import: ["@key"])
 
 type Query {
-  #"Retrieve users if logged in"
-  #Comic(comic_number: Int!): Comic
-  #"Return logged in user"
-  #me
-  "accounts"
+  "Returns all accounts"
   accounts: [account]
-  "1 acct"
+  "Find one account based on ID"
   account(id: ID!): account
 }
 

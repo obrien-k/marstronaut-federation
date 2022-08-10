@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "server": "nodemon ./server",
+    "start": "concurrently \"npm run server\" \"npm run client\" \"node .\/server\/subgraph-accounts\/index\" \"node .\/subgraph-nasa\/index\" \"node .\/server\/subgraph-xkcd\/index\" ",
+    "server": "node ./server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"node .\/server\/subgraph-accounts\/index\" \"node .\/subgraph-nasa\/index\" \"node .\/server\/subgraph-xkcd\/index\" ",
     "prod": "node ./server"
   },
   "repository": {
@@ -28,7 +28,8 @@
     "apollo-server": "^3.9.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
-    "graphql": "^16.5.0"
+    "graphql": "^16.5.0",
+    "concurrently": "^7.3.0"
   },
   "devDependencies": {
     "concurrently": "^7.3.0",

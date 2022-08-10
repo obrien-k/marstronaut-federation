@@ -2,10 +2,10 @@ const {ApolloServer, gql} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync('./xkcd.graphql', {encoding: 'utf-8'}));
-const resolvers = require('./resolvers');
-const XkcdAPI = require('./datasources/XkcdApi');
-const TotallySource = require('./datasources/totally');
+const typeDefs = gql(readFileSync(__dirname + '/xkcd.graphql', {encoding: 'utf-8'}));
+const resolvers = require(__dirname + '/resolvers');
+const XkcdAPI = require(__dirname + '/datasources/XkcdApi');
+const TotallySource = require(__dirname + '/datasources/totally');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),

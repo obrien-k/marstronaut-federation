@@ -1,4 +1,4 @@
-let { accounts } = require('./accounts.json');
+let { accounts } = require(__dirname + '/accounts.json');
 const fs = require('fs');
 
 class AccountSource {

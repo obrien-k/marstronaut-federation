@@ -2,9 +2,9 @@ const {ApolloServer, gql, AuthenticationError} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync('./accounts.graphql', {encoding: 'utf-8'}));
-const resolvers = require('./resolvers');
-const AccountSource = require('./datasources/accounts');
+const typeDefs = gql(readFileSync(__dirname + '/accounts.graphql', {encoding: 'utf-8'}));
+const resolvers = require(__dirname + '/resolvers');
+const AccountSource = require(__dirname + '/datasources/accounts');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),

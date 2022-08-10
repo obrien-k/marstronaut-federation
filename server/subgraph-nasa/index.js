@@ -2,9 +2,9 @@ const {ApolloServer, gql} = require('apollo-server');
 const {readFileSync} = require('fs');
 const {buildSubgraphSchema} = require('@apollo/subgraph');
 
-const typeDefs = gql(readFileSync('./nasa.graphql', {encoding: 'utf-8'}));
-const resolvers = require('./resolvers');
-const NasaAPI = require('./datasources/NasaApi');
+const typeDefs = gql(readFileSync(__dirname + '/nasa.graphql', {encoding: 'utf-8'}));
+const resolvers = require(__dirname + '/resolvers');
+const NasaAPI = require(__dirname + '/datasources/NasaApi');
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({typeDefs, resolvers}),

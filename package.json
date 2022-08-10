@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-accounts/index\" \"node ./subgraph-nasa/index\" \"node ./server/subgraph-xkcd/index\" ",
+    "start": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-accounts/index\" \"node ./server/subgraph-nasa/index\" \"node ./server/subgraph-xkcd/index\" ",
     "server": "node ./server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-accounts/index\" \"node ./server/subgraph-nasa/index\" \"node ./server/subgraph-xkcd/index\" ",

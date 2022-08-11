@@ -22,7 +22,7 @@ const resolvers = {
   },
   account: {
     __resolveReference: ({id}, {dataSources}) => {
-      return dataSources.AccountSource.getAccounts(id);
+      return dataSources.AccountSource.getAccount(id);
     }
   }
 

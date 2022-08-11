@@ -8,7 +8,7 @@ const resolvers = {
       return dataSources.nasaAPI.getPhotos(rover_name, earth_date);
     },
     Apod: (_, __, {dataSources}) => {
-      return dataSources.nasaAPI.getApod();
+      return dataSources.nasaAPI.getApods();
     }
   },
   Photo_Details: {

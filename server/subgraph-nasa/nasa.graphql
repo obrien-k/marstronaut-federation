@@ -58,7 +58,7 @@ type Apod {
 }
 
 type totally @key(fields: "id", resolvable:false) {
-  id: ID!
+  ids: ID!
 }
 
 "Names of Mars Rovers"

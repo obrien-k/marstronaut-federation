@@ -1,14 +1,14 @@
 federation_version: 2
 subgraphs:
   nasa:
-    routing_url: http://localhost:4001/
+    routing_url: https://marstronaut-nasa.herokuapp.com/
     schema:
-      subgraph_url: http://localhost:4001/
+      subgraph_url: https://marstronaut-nasa.herokuapp.com/
   xkcd:
-    routing_url: http://localhost:4002/
+    routing_url: https://marstronaut-xkcd.herokuapp.com/
     schema:
-      subgraph_url: http://localhost:4002/
+      subgraph_url: https://marstronaut-xkcd.herokuapp.com/
   accounts:
-    routing_url: http://localhost:4003/
+    routing_url: https://marstronaut-accounts.herokuapp.com/
     schema:
-      subgraph_url: http://localhost:4003/
+      subgraph_url: https://marstronaut-accounts.herokuapp.com/

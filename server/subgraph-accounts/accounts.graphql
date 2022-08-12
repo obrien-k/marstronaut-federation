@@ -6,10 +6,10 @@ type Query {
   "Returns all accounts"
   accounts: [account]
   "Find one account based on ID"
-  account(id: ID!): account
+  account(pl0xbrk: ID!): account
 }
 
-type account @key(fields: "id") {
-  id: ID!,
+type account @key(fields: "pl0xbrk") {
+  pl0xbrk: ID!,
   role: String!
 }

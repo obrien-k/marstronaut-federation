@@ -17,9 +17,9 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
 type account
-  @join__type(graph: ACCOUNTS, key: "id")
+  @join__type(graph: ACCOUNTS, key: "pl0xbrk")
 {
-  id: ID!
+  pl0xbrk: ID!
   role: String!
 }
 
@@ -136,7 +136,7 @@ type Query
   accounts: [account] @join__field(graph: ACCOUNTS)
 
   """Find one account based on ID"""
-  account(id: ID!): account @join__field(graph: ACCOUNTS)
+  account(pl0xbrk: ID!): account @join__field(graph: ACCOUNTS)
 
   """Retrieves manifest info based on rover name"""
   Manifest(name: String!): Manifest! @join__field(graph: NASA)

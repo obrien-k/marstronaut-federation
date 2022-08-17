@@ -15,7 +15,7 @@ const resolvers = {
     __resolveReference: ({ id }, { dataSources }) => {
       return { id };
     },
-    totally: (id, __, { dataSources }) => {
+    totally: ({ id }, __, { dataSources }) => {
       return dataSources.totallySource.getTotally(id);
     },
   },

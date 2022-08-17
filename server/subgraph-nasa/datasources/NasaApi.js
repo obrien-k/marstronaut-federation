@@ -3,7 +3,7 @@ require("dotenv").config({ path: "../.env" });
 
 class NasaAPI extends RESTDataSource {
   willSendRequest(request) {
-    request.params.set("api_key", "tDJerD6NCw1lRtlDbcCmzg3GOAui5C6XpMzLurCK");
+    request.params.set("api_key", process.env.NASA_KEY);
   }
 
   constructor() {

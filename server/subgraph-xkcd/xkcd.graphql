@@ -1,6 +1,6 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: ["@key"])
+        import: ["@key", "@external", "@requires", "@shareable"])
 
 type Query {
   "Retrieves comic info based on comic number"
@@ -16,7 +16,13 @@ type Comic {
   alt: String!
 }
 
-type totally @key(fields: "id") {
+type totally {
   id: ID!,
   cool: Boolean
+}
+
+
+type Photo_Details @key(fields: "id") {
+  id: ID!
+  totally: totally
 }

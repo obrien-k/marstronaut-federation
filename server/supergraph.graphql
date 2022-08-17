@@ -46,9 +46,9 @@ type Comic
 scalar join__FieldSet
 
 enum join__Graph {
-  ACCOUNTS @join__graph(name: "accounts", url: "https://marstronaut-accounts.herokuapp.com/")
-  NASA @join__graph(name: "nasa", url: "https://marstronaut-nasa.herokuapp.com/")
-  XKCD @join__graph(name: "xkcd", url: "https://marstronaut-xkcd.herokuapp.com/")
+  ACCOUNTS @join__graph(name: "accounts", url: "http://localhost:4003/")
+  NASA @join__graph(name: "nasa", url: "http://localhost:4001/")
+  XKCD @join__graph(name: "xkcd", url: "http://localhost:4002/")
 }
 
 scalar link__Import
@@ -71,19 +71,13 @@ type Manifest
   photo_manifest: Photo_Manifest
 }
 
-"""Names of Mars Rovers"""
-enum MarsRover
-  @join__type(graph: NASA)
-{
-  """Deployed in April 2006"""
-  Curiosity
-}
-
 type Photo_Details
-  @join__type(graph: NASA)
+  @join__type(graph: NASA, key: "id")
+  @join__type(graph: XKCD, key: "id")
 {
-  img_src: String
-  totally: totally
+  id: ID!
+  img_src: String @join__field(graph: NASA)
+  totally: totally @join__field(graph: XKCD)
 }
 
 type Photo_Manifest
@@ -155,9 +149,8 @@ type Query
 }
 
 type totally
-  @join__type(graph: NASA, key: "id", resolvable: false)
-  @join__type(graph: XKCD, key: "id")
+  @join__type(graph: XKCD)
 {
   id: ID!
-  cool: Boolean @join__field(graph: XKCD)
+  cool: Boolean
 }

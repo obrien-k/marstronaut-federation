@@ -3,12 +3,12 @@ subgraphs:
   nasa:
     routing_url: http://localhost:4001/
     schema:
-      subgraph_url: http://localhost:4001/
+      file: ./subgraph-nasa/nasa.graphql
   xkcd:
     routing_url: http://localhost:4002/
     schema:
-      subgraph_url: http://localhost:4002/
+      file: ./subgraph-xkcd/xkcd.graphql
   accounts:
     routing_url: http://localhost:4003/
     schema:
-      subgraph_url: http://localhost:4003/
+      file: ./subgraph-accounts/accounts.graphql

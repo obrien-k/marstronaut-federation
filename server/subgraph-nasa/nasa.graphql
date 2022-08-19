@@ -1,6 +1,6 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: ["@key", "@external"])
+        import: ["@key", "@external", "@shareable"])
 
 type Query {
   "Retrieves manifest info based on rover name"
@@ -44,9 +44,9 @@ type Photolist {
   photos: [Photo_Details]
 }
 
-type Photo_Details {
+type Photo_Details @key(fields: "id") {
+  id: ID!
   img_src: String
-  totally: totally
 }
 
 "Astronomy photo of the day"
@@ -55,14 +55,4 @@ type Apod {
   url: String
   "High definition image URL"
   hdurl: String
-}
-
-type totally @key(fields: "id", resolvable:false) {
-  id: ID!
-}
-
-"Names of Mars Rovers"
-enum MarsRover {
-  "Deployed in April 2006"
-  Curiosity
 }

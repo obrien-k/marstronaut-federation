@@ -46,9 +46,9 @@ type Comic
 scalar join__FieldSet
 
 enum join__Graph {
-  ACCOUNTS @join__graph(name: "accounts", url: "http://localhost:4003/")
-  NASA @join__graph(name: "nasa", url: "http://localhost:4001/")
-  XKCD @join__graph(name: "xkcd", url: "http://localhost:4002/")
+  ACCOUNTS @join__graph(name: "accounts", url: "https://marstronaut-accounts.herokuapp.com/")
+  NASA @join__graph(name: "nasa", url: "https://marstronaut-nasa.herokuapp.com//")
+  XKCD @join__graph(name: "xkcd", url: "https://marstronaut-xkcd.herokuapp.com/")
 }
 
 scalar link__Import

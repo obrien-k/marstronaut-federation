@@ -6,8 +6,10 @@ Query via [Apollo](https://github.com/apollographql) [Studio](https://studio.apo
 
 ## Example Vars
 
-```{
+```
+{
   "comicNumber": 1078,
   "roverName": "curiosity",
   "earthDate": "2012-07-06"
-}```
+}
+```

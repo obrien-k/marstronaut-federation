@@ -13,3 +13,11 @@ Query via [Apollo](https://github.com/apollographql) [Studio](https://studio.apo
   "earthDate": "2012-07-06"
 }
 ```
+
+```
+{
+  "comicNumber": 1691,
+  "roverName": "curiosity",
+  "earthDate": "2016-6-8"
+}  
+```

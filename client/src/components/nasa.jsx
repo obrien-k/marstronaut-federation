@@ -42,7 +42,7 @@ function NasaPhotoData(earthDate) {
         <p>{earthDate.text}</p>
       </div>
       <div style ={{fontSize:'medium', fontWeight:'450', textShadow:'1px 1px #fff', paddingLeft:'200px'}}>
-        <p>Text courtesy <a href="https://xkcd.com/json.html">xkcd</a>, images courtesy <a href="https://api.nasa.gov">NASA</a>.</p>
+        <p>Text courtesy <a href="https://xkcd.com/json.html">xkcd</a>, images courtesy <a href="https://api.nasa.gov">NASA</a>, launched on <a href="https://apollographql.com">Apollo</a> 🚀</p>
       </div>
     </div>
   );

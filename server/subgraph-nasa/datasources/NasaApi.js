@@ -18,13 +18,11 @@ class NasaAPI extends RESTDataSource {
   }
 
   async getPhotos(rover_name, earth_date) {
-    const test = await this.get(
+    return await this.get(
       `mars-photos/api/v1/rovers/${encodeURIComponent(
         rover_name
       )}/photos?earth_date=${encodeURIComponent(earth_date)}`
     );
-    console.log(test);
-    return test;
   }
 
   async getApod() {

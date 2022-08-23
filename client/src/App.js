@@ -1,11 +1,11 @@
 import XkcdData from './components/xkcd';
-import NasaPhotoData from './components/nasa';
-
+import { EmbeddedExplorer } from './components/embeddedExplorer';
 
 export default function App() {
   return (
     <div>
       <XkcdData />
+      <EmbeddedExplorer />
     </div>
   );
 }

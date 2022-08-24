@@ -7,22 +7,26 @@ export function EmbeddedExplorer() {
       persistExplorerState={false}
       initialState={{
         document: `query ExampleQuery {
-  accounts {
-    id
-  }
-  Apod {
-    url
-  }
-  totally {
-    id
-  }
+          accounts {
+            id
+          }
+          Apod {
+            url
+          }
+          totally {
+            id
+          }
 }
 `,
-        variables: {},
+        variables: {
+          "comicNumber": 1078,
+          "roverName": "curiosity",
+          "earthDate": "2012-07-06"
+        },
         headers: {},
         displayOptions: {
           showHeadersAndEnvVars: true, 
-          docsPanelState: 'open', 
+          docsPanelState: 'closed', 
           theme: 'dark',
         },
       }}

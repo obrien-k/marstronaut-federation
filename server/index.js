@@ -30,12 +30,14 @@ const server = new ApolloServer({
     const token = req.headers.authorization || ''; // e.g., "Bearer user-1"
     // Get the user token after "Bearer "
     const id = token.split(' ')[1]; // e.g., "user-1"
+
+    if (!id) throw new AuthenticationError('You must be logged in');
     if (id) { // clean this up, assign userId to a var and start using real data
       return {user: {userId: id, userRole:"test"}}
     }
-    if (!id) { // guest account for not logged in
+    /*if (!id) { // guest account for not logged in
       return {user: {userId: "0", userRole: "Guest"}}
-    }
+    }*/
   }
 });
 

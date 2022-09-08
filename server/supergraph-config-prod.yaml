@@ -3,12 +3,12 @@ subgraphs:
   nasa:
     routing_url: https://marstronaut-nasa.herokuapp.com/
     schema:
-      subgraph_url: https://marstronaut-nasa.herokuapp.com/
+      subgraph_url: ./subgraph-nasa/nasa.graphql
   xkcd:
     routing_url: https://marstronaut-xkcd.herokuapp.com/
     schema:
-      subgraph_url: https://marstronaut-xkcd.herokuapp.com/
+      subgraph_url: ./subgraph-xkcd/xkcd.graphql
   accounts:
     routing_url: https://marstronaut-accounts.herokuapp.com/
     schema:
-      subgraph_url: https://marstronaut-accounts.herokuapp.com/
+      subgraph_url: ./subgraph-accounts/accounts.graphql

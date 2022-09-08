@@ -11,6 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\" \"node ./server/subgraph-accounts/index\" \"node ./server/subgraph-nasa/index\" \"node ./server/subgraph-xkcd/index\" ",
     "prod": "node ./server",
     "compose-schema": "rover supergraph compose --config ./server/supergraph-config.yaml > ./server/supergraph.graphql",
+    "compose-prod-schema": "rover supergraph compose --config ./server/supergraph-config-prod.yaml > ./server/supergraph.graphql",
     "accounts-subgraph-publish": "rover subgraph publish Marstronaut@dev --name accounts --schema ./server/subgraph-accounts/accounts.graphql --routing-url http://localhost:4003"
   },
   "repository": {

@@ -10,6 +10,5 @@ type Query {
 }
 
 type account @key(fields: "id") {
-  id: ID!,
-  role: String!
+  id: ID!
 }

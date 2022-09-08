@@ -20,7 +20,6 @@ type account
   @join__type(graph: ACCOUNTS, key: "id")
 {
   id: ID!
-  role: String!
 }
 
 """Astronomy photo of the day"""

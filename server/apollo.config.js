@@ -1,8 +1,7 @@
 module.exports = {
   client: {
     service: {
-      name: "marstronaut-federation",
-      url: "http://localhost:4000",
+      localSchemaFile: "./supergraph-schema.graphql"
     },
   },
 };

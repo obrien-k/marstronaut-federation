@@ -1,5 +1,6 @@
 FROM node:16 AS builder
 LABEL maintainer="kyle@apollographql.com"
+ENV NODE_ENV=production
 WORKDIR /client
 
 COPY package*.json .
@@ -20,7 +21,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copy built assets from builder stage into html folder for Nginx to serve
-COPY --from=builder /build .
+COPY --from=builder /client/build .
 
 # Expose app on port 80...
 EXPOSE 80

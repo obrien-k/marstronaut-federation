@@ -1,14 +1,14 @@
 federation_version: 2
 subgraphs:
   nasa:
-    routing_url: https://marstronaut-nasa.stellargra.ph/
+    routing_url: https://marstronaut-nasa.fly.dev/
     schema:
       file: ./subgraph-nasa/nasa.graphql
   xkcd:
-    routing_url: https://marstronaut-xkcd.stellargra.ph/
+    routing_url: https://marstronaut-xkcd.fly.dev/
     schema:
       file: ./subgraph-xkcd/xkcd.graphql
   accounts:
-    routing_url: https://marstronaut-accounts.stellargra.ph/
+    routing_url: https://marstronaut-accounts.fly.dev/
     schema:
       file: ./subgraph-accounts/accounts.graphql

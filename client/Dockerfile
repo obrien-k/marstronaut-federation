@@ -1,6 +1,6 @@
 FROM node:16 AS builder
 LABEL maintainer="kyle@apollographql.com"
-WORKDIR /
+WORKDIR /client
 
 COPY package*.json .
 RUN npm install

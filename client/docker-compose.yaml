@@ -1,0 +1,10 @@
+version: '0.1'
+services:
+  marstronaut-client:
+    build: .
+    container_name: marstronaut-client
+    image: mastronaut-client:latest
+    cpus: 1.5
+    mem_limit: 2048m
+    ports:
+      - "8080:80"

@@ -19,7 +19,6 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
-
 # Copy built assets from builder stage into html folder for Nginx to serve
 COPY --from=builder /client/build .
 

@@ -1,5 +1,3 @@
-# fly.toml file generated for marstronaut-accounts on 2022-10-18T12:03:47-05:00
-
 app = "marstronaut-accounts"
 kill_signal = "SIGINT"
 kill_timeout = 5

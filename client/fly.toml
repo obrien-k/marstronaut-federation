@@ -1,3 +1,5 @@
+# fly.toml file generated for marstronaut-client on 2022-10-19T10:59:26-05:00
+
 app = "marstronaut-client"
 kill_signal = "SIGINT"
 kill_timeout = 5
@@ -9,7 +11,7 @@ processes = []
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["marstronaut-service"]
+  processes = ["app"]
   protocol = "tcp"
   script_checks = []
 
@@ -32,7 +34,3 @@ processes = []
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
-
-[[statics]]
-  guest_path = "/public"
-  url_prefix = "/"

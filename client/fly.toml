@@ -9,7 +9,6 @@ processes = []
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["marstronaut-service"]
   protocol = "tcp"
   script_checks = []
 

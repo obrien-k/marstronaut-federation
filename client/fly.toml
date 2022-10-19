@@ -34,3 +34,10 @@ processes = []
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
+<<<<<<< HEAD
+=======
+
+[[statics]]
+  guest_path = "/public"
+  url_prefix = "/"
+>>>>>>> e8345c8149acc10fc2e1ea92aae5168cd4c54e50

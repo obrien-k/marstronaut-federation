@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.courtesyBackground {
+  padding-left: 200px;
+  background: rgb(51,51,51);
+  background: linear-gradient(180deg, rgba(51,51,51,1) 0%, rgba(231,231,231,1) 10%, rgba(51,51,51,1) 11%, rgba(231,231,231,1) 90%, rgba(51,51,51,1) 100%);
+}
+
+.courtesyText {
+  font-size: medium; 
+  font-weight: 450;
+  text-shadow: 1px 1px #fff;
+  width: 100%;
+}

@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import '../App.css';
 
 const GET_PHOTO = gql`
 query GetPhoto($roverName: String!, $earthDate: String!) {
@@ -34,15 +35,16 @@ function NasaPhotoData(earthDate) {
                  minWidth: '720px',
                  maxWidth: '100%',
                  minHeight: '1080px',
-                 maxHeight: '100%'}}>
+                 maxHeight: '100%',
+                 }}>
       <div style={{ fontFace:'Lobster, Garamond, Helvetica', 
                     fontSize:'xxx-large', fontWeight:'900', 
                     textShadow: '1px 1px #fff',
                     padding:'200px'}}>
         <p>{earthDate.text}</p>
       </div>
-      <div style ={{fontSize:'medium', fontWeight:'450', textShadow:'1px 1px #fff', paddingLeft:'200px'}}>
-        <p>Text courtesy <a href="https://xkcd.com/json.html">xkcd</a>, images courtesy <a href="https://api.nasa.gov">NASA</a>, launched on <a href="https://apollographql.com">Apollo</a> 🚀 <a href="https://github.com/obrien-k/marstronaut-federation">Source code on GitHub</a></p>
+      <div className='courtesyBackground'>
+        <p className='courtesyText'>Text courtesy <a href="https://xkcd.com/json.html">xkcd</a>, images courtesy <a href="https://api.nasa.gov">NASA</a>, launched on <a href="https://apollographql.com">Apollo</a> 🚀 Source code on <a href="https://github.com/obrien-k/marstronaut-federation">GitHub</a></p>
       </div>
     </div>
   );

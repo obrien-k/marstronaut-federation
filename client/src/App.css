@@ -37,6 +37,23 @@
   }
 }
 
+@media only screen and (max-width: 720px) {
+
+  .nasaBackgroundImage {
+    max-width: 720px;
+  }
+
+  .courtesyText {
+     font-size: 3em;
+  }
+
+  .xkcdText {
+    font-size: large;
+    font-weight: 400;
+  }
+
+}
+
 .courtesyBackground {
   padding-left: 200px;
   background: rgb(51,51,51);

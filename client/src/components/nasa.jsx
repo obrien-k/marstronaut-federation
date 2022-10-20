@@ -30,14 +30,14 @@ function NasaPhotoData(earthDate) {
   images.forEach(e =>{imageList.push(e.img_src)})
   const finalImage = imageList.slice(0,1)
   return (
-    <div style={{backgroundImage: data.Photolist.photos.length > 0 ? `url(${finalImage})` : `url(${data.Apod.hdurl})`,
+    <div className='nasaBackgroundImage' style={{backgroundImage: data.Photolist.photos.length > 0 ? `url(${finalImage})` : `url(${data.Apod.hdurl})`,
                  backgroundSize: 'cover',
                  minWidth: '720px',
                  maxWidth: '100%',
                  minHeight: '1080px',
                  maxHeight: '100%',
                  }}>
-      <div style={{ fontFace:'Lobster, Garamond, Helvetica', 
+      <div className='xkcdText' style={{ fontFace:'Lobster, Garamond, Helvetica', 
                     fontSize:'xxx-large', fontWeight:'900', 
                     textShadow: '1px 1px #fff',
                     padding:'200px'}}>

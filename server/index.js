@@ -1,6 +1,6 @@
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server');
-import { ApolloServerPluginInlineTraceDisabled } from "apollo-server-core";
+const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 const { ApolloGateway, RemoteGraphQLDataSource } = require('@apollo/gateway');
 const { readFileSync } = require('fs');
 

@@ -1,6 +1,5 @@
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server');
-const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 const { ApolloGateway, RemoteGraphQLDataSource } = require('@apollo/gateway');
 const { readFileSync } = require('fs');
 
@@ -37,10 +36,7 @@ const server = new ApolloServer({
     if (!id) { // guest account for not logged in
       return {user: {userId: "0", userRole: "Guest"}}
     }
-  },
-  plugins: [
-    ApolloServerPluginInlineTraceDisabled(),
-  ],
+  }
 });
 
 

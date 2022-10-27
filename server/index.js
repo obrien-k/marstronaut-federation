@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server');
+import { ApolloServerPluginInlineTraceDisabled } from "apollo-server-core";
 const { ApolloGateway, RemoteGraphQLDataSource } = require('@apollo/gateway');
-const { buildSubgraphSchema } = require('@apollo/subgraph');
 const { readFileSync } = require('fs');
 
 const supergraphSdl = readFileSync(__dirname + '/supergraph.graphql').toString();
@@ -12,14 +12,15 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
     // as a header called `user-id`
     request.http.headers.set('userId', context.user.userId);
     request.http.headers.set('userRole', context.user.userRole);
+    request.http.headers.set('apollo-federation-include-trace', 'ftv1');
   }
 }
 
 const gateway = new ApolloGateway({
   supergraphSdl,
-  buildService({ name, url }) {
+  buildService({ url }) {
     return new AuthenticatedDataSource({ url });
-  },
+  }
 });
 
 const server = new ApolloServer({
@@ -36,7 +37,10 @@ const server = new ApolloServer({
     if (!id) { // guest account for not logged in
       return {user: {userId: "0", userRole: "Guest"}}
     }
-  }
+  },
+  plugins: [
+    ApolloServerPluginInlineTraceDisabled(),
+  ],
 });
 
 

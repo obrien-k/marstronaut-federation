@@ -12,6 +12,7 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
     request.http.headers.set('userId', context.user.userId);
     request.http.headers.set('userRole', context.user.userRole);
     request.http.headers.set('apollo-federation-include-trace', 'ftv1');
+    request.http.headers.set('Access-Control-Expose-Headers', '*');
   }
 }
 

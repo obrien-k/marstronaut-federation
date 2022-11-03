@@ -1,9 +1,14 @@
 const { AuthenticationError } = require("apollo-server");
 
 const resolvers = {
+  Mutation: {
+    addAccount: async (_, { id, role }, { dataSources }) => {
+      return dataSources.AccountSource.addAccount(id, role);
+    }
+  },
   Query: {
     // returns account A&A
-    account: async (_, {id}, context) => {
+    account: async (_, { id }, context) => {
      console.log(context.user);
      /* if(!context.user) throw new AuthenticationError("authErrMessage");
       if(context.userId == '141592') {
@@ -21,7 +26,7 @@ const resolvers = {
     }
   },
   account: {
-    __resolveReference: ({id}, {dataSources}) => {
+    __resolveReference: ({ id }, {dataSources}) => {
       return dataSources.AccountSource.getAccount(id);
     }
   }

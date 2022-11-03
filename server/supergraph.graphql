@@ -4,6 +4,7 @@ schema
   @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
 {
   query: Query
+  mutation: Mutation
 }
 
 directive @join__field(graph: join__Graph!, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
@@ -46,9 +47,9 @@ type Comic
 scalar join__FieldSet
 
 enum join__Graph {
-  ACCOUNTS @join__graph(name: "accounts", url: "https://marstronaut-accounts.fly.dev/")
-  NASA @join__graph(name: "nasa", url: "https://marstronaut-nasa.fly.dev/")
-  XKCD @join__graph(name: "xkcd", url: "https://marstronaut-xkcd.fly.dev/")
+  ACCOUNTS @join__graph(name: "accounts", url: "http://localhost:4003/")
+  NASA @join__graph(name: "nasa", url: "http://localhost:4001/")
+  XKCD @join__graph(name: "xkcd", url: "http://localhost:4002/")
 }
 
 scalar link__Import
@@ -69,6 +70,12 @@ type Manifest
   @join__type(graph: NASA)
 {
   photo_manifest: Photo_Manifest
+}
+
+type Mutation
+  @join__type(graph: ACCOUNTS)
+{
+  addAccount(id: ID!, role: String!): account
 }
 
 type Photo_Details

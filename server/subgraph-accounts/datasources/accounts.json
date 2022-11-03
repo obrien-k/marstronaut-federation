@@ -1,11 +1,13 @@
 {
   "accounts":
-  [{
+[
+  {
     "id": "141592",
     "role": "admin"
   },
   {
     "id": "1",
     "role": "member"
-  }]
+  }
+]
 }

@@ -9,7 +9,11 @@ type Query {
   account(id: ID!): account
 }
 
+type Mutation {
+  addAccount (id: ID!, role: String!): account
+}
+
 type account @key(fields: "id") {
-  id: ID!,
+  id: ID!
   role: String!
 }

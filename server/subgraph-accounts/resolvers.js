@@ -3,7 +3,13 @@ const { AuthenticationError } = require("apollo-server");
 const resolvers = {
   Mutation: {
     addAccount: async (_, { id, role }, { dataSources }) => {
-      return dataSources.AccountSource.addAccount(id, role);
+      const newAccount = await dataSources.AccountSource.addAccount(id, role);
+      console.log(newAccount);
+      return {
+        code: 200,
+        success: true,
+        message: 'Success', 
+        account: newAccount}
     }
   },
   Query: {

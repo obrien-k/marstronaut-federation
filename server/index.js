@@ -2,7 +2,6 @@ require('dotenv').config()
 const { ApolloServer } = require('apollo-server');
 const { ApolloGateway, RemoteGraphQLDataSource } = require('@apollo/gateway');
 const { readFileSync } = require('fs');
-const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 
 const supergraphSdl = readFileSync(__dirname + '/supergraph.graphql').toString();
 
@@ -38,8 +37,7 @@ const server = new ApolloServer({
     if (!id) { // guest account for not logged in
       return {user: {userId: "0", userRole: "Guest"}}
     }
-  },
-  plugins: [ApolloServerPluginInlineTraceDisabled()],
+  }
 });
 
 server.listen({port: process.env.PORT || 4000}).then(({ url }) => {

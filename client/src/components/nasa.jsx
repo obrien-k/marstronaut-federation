@@ -1,5 +1,14 @@
 import { useQuery, gql } from '@apollo/client';
 import '../App.css';
+import mongoose from 'mongoose';
+import ImageList from '../models/imagelist'
+
+// Set up default mongoose connection
+const mongoDB = "mongodb+srv://mars:V2snkmD2s2ir0iAn@marstronaut.r0sh3sf.mongodb.net/Marstronaut";
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(function(data) { console.log("data = ", data); }).catch(function(err) { console.log(err); });
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
 
 const GET_PHOTO = gql`
 query GetPhoto($roverName: String!, $earthDate: String!) {
@@ -25,10 +34,26 @@ function NasaPhotoData(earthDate) {
   /* Iterating through the data, this should be re-factored
       to be handled in gql server (e.g. limit the data that
       is being queried/returned) */
+      
+
   const images = (data.Photolist.photos);
   const imageList = []
   images.forEach(e =>{imageList.push(e.img_src)})
   const finalImage = imageList.slice(0,1)
+
+  try {
+    const newImageList = new ImageList({
+      img_src: imageList.img_src
+    });
+
+    const n = newImageList.save();
+
+    console.log(n);
+  } catch (err) {
+    console.error(err.message);
+    return(err);
+  }
+
   return (
     <div className='nasaBackgroundImage' style={{backgroundImage: data.Photolist.photos.length > 0 ? `url(${finalImage})` : `url(${data.Apod.hdurl})`,
                  backgroundSize: 'cover',

@@ -40,8 +40,6 @@ const server = new ApolloServer({
   }
 });
 
-
-
 server.listen({port: process.env.PORT || 4000}).then(({ url }) => {
   console.log(`🚀 Gateway ready at ${url}`);
 }).catch(err => {console.error(err)});

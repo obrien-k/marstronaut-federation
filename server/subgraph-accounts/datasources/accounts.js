@@ -20,11 +20,13 @@ class AccountSource {
       if (err) return console.log(err);
       console.log(JSON.stringify(fileMod));
       console.log('writing to accounts.json');
+      
     })
      // Can this be made more DRY? See lines 10-14 / getAccount
     const accountsFile = fs.readFileSync(__dirname + '/accounts.json', {encoding:'utf-8'})
     const parsedFile = JSON.parse(accountsFile);
     const findAccount = (parsedFile.accounts.find(i => i.id == accountId))
+    console.log(findAccount + 'findAccount returning undefined first attempt')
     return findAccount;
   }
 }

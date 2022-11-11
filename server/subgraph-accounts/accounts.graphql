@@ -10,10 +10,17 @@ type Query {
 }
 
 type Mutation {
-  addAccount (id: ID!, role: String!): account
+  addAccount (id: ID!, role: String!): addAccountResponse!
 }
 
 type account @key(fields: "id") {
   id: ID!
   role: String!
+}
+
+type addAccountResponse {
+  code: Int
+  success: Boolean
+  message: String
+  account: account
 }

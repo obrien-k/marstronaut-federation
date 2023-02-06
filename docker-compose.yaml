@@ -1,0 +1,10 @@
+version: '1'
+services:
+  apollo-router:
+    container_name: apollo-router
+    build: apollographql/router:v1.10.0
+    volumes:
+      - ./supergraph.graphql:/etc/config/supergraph.graphql
+      - ./router.yaml:/dist/config/router.yaml
+    ports:
+      - "4000:4000"

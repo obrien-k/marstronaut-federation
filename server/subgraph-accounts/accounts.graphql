@@ -13,9 +13,14 @@ type Mutation {
   addAccount (id: ID!, role: String!): addAccountResponse!
 }
 
-type account @key(fields: "id") {
+type account @key(fields: "id") @key(fields: "address_id") {
   id: ID!
+  address_id: ID!
   role: String!
+}
+
+extend type account @key(fields: "address_id") {
+  address_line_1: String
 }
 
 type addAccountResponse {

@@ -3,11 +3,15 @@
 [
   {
     "id": "141592",
-    "role": "admin"
+    "role": "admin",
+    "address_id": "0",
+    "address_line_1": "Notta"
   },
   {
     "id": "1",
-    "role": "member"
+    "role": "member",
+    "address_id": "1",
+    "address_line_1": "Ratta"
   }
 ]
 }

@@ -1,14 +1,14 @@
-const { accounts } = require(__dirname + '/accounts.json');
+const { Accounts } = require(__dirname + '/accounts.json');
 const fs = require('fs');
 
 class AccountSource {
   getAccounts() {
-    return accounts;
+    return Accounts;
   }
   getAccount(accountId) {
     const accountsFile = fs.readFileSync(__dirname + '/accounts.json', {encoding:'utf-8'})
     const parsedFile = JSON.parse(accountsFile);
-    const findAccount = (parsedFile.accounts.find(i => i.id == accountId))
+    const findAccount = (parsedFile.Accounts.find(i => i.id == accountId))
     return findAccount;
   }
   addAccount(accountId, role) {

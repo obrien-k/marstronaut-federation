@@ -19,6 +19,12 @@ const resolvers = {
       return dataSources.totallySource.getTotally(id);
     },
   },
+  totally: {
+    __resolveReference: ({id}) => {
+      console.log("totally reference resolver" + id);
+      return (id);
+    },
+  }
 };
 
 module.exports = resolvers;

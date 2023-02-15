@@ -1,0 +1,18 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key", "@external", "@requires"])
+
+type Query {
+  "Returns all accounts"
+  Orders: [Order]
+  "Find one account based on ID"
+  Order(id: ID!): Order
+  "Find all orders for an account"
+  AccountOrders(account_id: ID!): [Order]
+}
+
+type Order @key(fields: "id") @key(fields:"account_id") {
+  id: ID!
+  account_id: ID!
+  total: Int
+}

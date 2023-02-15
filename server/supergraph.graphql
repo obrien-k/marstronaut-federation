@@ -1,4 +1,3 @@
-
 schema
   @link(url: "https://specs.apollo.dev/link/v1.0")
   @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
@@ -17,11 +16,26 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-type account
+type Account
   @join__type(graph: ACCOUNTS, key: "id")
+  @join__type(graph: ACCOUNTS, key: "address_id")
+  @join__type(graph: ACCOUNTS, key: "address_id", extension: true)
 {
   id: ID!
+  address_id: ID!
   role: String!
+  Orders: [Order]
+  sales_total: Int @join__field(graph: ACCOUNTS, requires: "{Orders {total}}")
+  address_line_1: String
+}
+
+type addAccountResponse
+  @join__type(graph: ACCOUNTS)
+{
+  code: Int
+  success: Boolean
+  message: String
+  Account: Account
 }
 
 """Astronomy photo of the day"""
@@ -47,9 +61,10 @@ type Comic
 scalar join__FieldSet
 
 enum join__Graph {
-  ACCOUNTS @join__graph(name: "accounts", url: "https://marstronaut-accounts.fly.dev/")
-  NASA @join__graph(name: "nasa", url: "https://marstronaut-nasa.fly.dev/")
-  XKCD @join__graph(name: "xkcd", url: "https://marstronaut-xkcd.fly.dev/")
+  ACCOUNTS @join__graph(name: "accounts", url: "http://localhost:4003/")
+  NASA @join__graph(name: "nasa", url: "http://localhost:4001/")
+  ORDERS @join__graph(name: "orders", url: "http://localhost:4004/")
+  XKCD @join__graph(name: "xkcd", url: "http://localhost:4002/")
 }
 
 scalar link__Import
@@ -75,7 +90,17 @@ type Manifest
 type Mutation
   @join__type(graph: ACCOUNTS)
 {
-  addAccount(id: ID!, role: String!): account
+  addAccount(id: ID!, role: String!): addAccountResponse!
+}
+
+type Order
+  @join__type(graph: ACCOUNTS, key: "account_id")
+  @join__type(graph: ORDERS, key: "id")
+  @join__type(graph: ORDERS, key: "account_id")
+{
+  account_id: ID!
+  total: Int @join__field(graph: ACCOUNTS, external: true) @join__field(graph: ORDERS)
+  id: ID! @join__field(graph: ORDERS)
 }
 
 type Photo_Details
@@ -131,13 +156,14 @@ type Photos
 type Query
   @join__type(graph: ACCOUNTS)
   @join__type(graph: NASA)
+  @join__type(graph: ORDERS)
   @join__type(graph: XKCD)
 {
-  """Returns all accounts"""
-  accounts: [account] @join__field(graph: ACCOUNTS)
+  """Returns all Accounts"""
+  Accounts: [Account] @join__field(graph: ACCOUNTS)
 
-  """Find one account based on ID"""
-  account(id: ID!): account @join__field(graph: ACCOUNTS)
+  """Find one Account based on ID"""
+  Account(id: ID!): Account @join__field(graph: ACCOUNTS)
 
   """Retrieves manifest info based on rover name"""
   Manifest(name: String!): Manifest! @join__field(graph: NASA)
@@ -148,6 +174,15 @@ type Query
   """Retrieves the astronomy photo of the day"""
   Apod: Apod @join__field(graph: NASA)
 
+  """Returns all accounts"""
+  Orders: [Order] @join__field(graph: ORDERS)
+
+  """Find one account based on ID"""
+  Order(id: ID!): Order @join__field(graph: ORDERS)
+
+  """Find all orders for an account"""
+  AccountOrders(account_id: ID!): [Order] @join__field(graph: ORDERS)
+
   """Retrieves comic info based on comic number"""
   Comic(comic_number: Int!): Comic @join__field(graph: XKCD)
 
@@ -156,8 +191,8 @@ type Query
 }
 
 type totally
-  @join__type(graph: XKCD)
+  @join__type(graph: XKCD, key: "id")
 {
-  id: ID!
+  id: ID
   cool: Boolean
 }

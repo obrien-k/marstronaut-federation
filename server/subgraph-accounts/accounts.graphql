@@ -1,25 +1,32 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: ["@key"])
+        import: ["@key", "@external", "@requires"])
 
 type Query {
-  "Returns all accounts"
-  accounts: [account]
-  "Find one account based on ID"
-  account(id: ID!): account
+  "Returns all Accounts"
+  Accounts: [Account]
+  "Find one Account based on ID"
+  Account(id: ID!): Account
 }
 
 type Mutation {
   addAccount (id: ID!, role: String!): addAccountResponse!
 }
 
-type account @key(fields: "id") @key(fields: "address_id") {
+type Order @key(fields: "account_id") {
+  account_id: ID!
+  total: Int @external
+}
+
+type Account @key(fields: "id") @key(fields: "address_id") {
   id: ID!
   address_id: ID!
   role: String!
+  Orders: [Order]
+  sales_total: Int @requires(fields:"{Orders {total}}")
 }
 
-extend type account @key(fields: "address_id") {
+extend type Account @key(fields: "address_id") {
   address_line_1: String
 }
 
@@ -27,5 +34,6 @@ type addAccountResponse {
   code: Int
   success: Boolean
   message: String
-  account: account
+  Account: Account
 }
+

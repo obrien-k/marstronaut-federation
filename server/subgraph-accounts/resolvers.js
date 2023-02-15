@@ -9,12 +9,12 @@ const resolvers = {
         code: 200,
         success: true,
         message: 'Success', 
-        account: newAccount}
+        Account: newAccount}
     }
   },
   Query: {
     // returns account A&A
-    account: async (_, { id }, context) => {
+    Account: async (_, { id }, context) => {
      console.log(context.user);
      /* if(!context.user) throw new AuthenticationError("authErrMessage");
       if(context.userId == '141592') {
@@ -27,16 +27,26 @@ const resolvers = {
       return context.dataSources.AccountSource.getAccount(id);
  
     },
-    accounts: async (_, __, {dataSources}) => {
+    Accounts: async (_, __, {dataSources}) => {
       return dataSources.AccountSource.getAccounts();
-    }
+    },
   },
-  account: {
-    __resolveReference: ({ id }, {dataSources}) => {
-      return dataSources.AccountSource.getAccount(id);
+  Account: {
+    __resolveReference: (reference, {dataSources}) => {
+      console.log("[subgraph-accounts][Account] reference" + JSON.stringify(reference))
+      return reference.id;
+    },
+  },
+  Order: {
+    __resolveReference: (reference, {dataSources}) => {
+      console.log("[subgraph-accounts][Order] reference" + JSON.stringify(reference))
+      return {account_id: reference.account_id};
+    },
+    total_sales: (reference) => {
+      console.log("[subgraph-accounts][Order][total_sales] reference" + JSON.stringify(reference))
+      return (reference.total);
     }
   }
-
 };
 
 module.exports = resolvers;

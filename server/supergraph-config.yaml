@@ -1,4 +1,4 @@
-federation_version: 2
+federation_version: "=2.2.1"
 subgraphs:
   nasa:
     routing_url: http://localhost:4001/
@@ -12,3 +12,7 @@ subgraphs:
     routing_url: http://localhost:4003/
     schema:
       file: ./subgraph-accounts/accounts.graphql
+  orders:
+    routing_url: http://localhost:4004/
+    schema:
+      file: ./subgraph-orders/orders.graphql

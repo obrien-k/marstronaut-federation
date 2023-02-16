@@ -20,13 +20,13 @@ type Account
   @join__type(graph: ACCOUNTS, key: "id")
   @join__type(graph: ACCOUNTS, key: "address_id")
   @join__type(graph: ACCOUNTS, key: "address_id", extension: true)
+  @join__type(graph: ORDERS, key: "id", extension: true)
 {
   id: ID!
-  address_id: ID!
-  role: String!
-  Orders: [Order]
-  sales_total: Int @join__field(graph: ACCOUNTS, requires: "{Orders {total}}")
-  address_line_1: String
+  address_id: ID! @join__field(graph: ACCOUNTS)
+  role: String! @join__field(graph: ACCOUNTS)
+  orders: [Order] @join__field(graph: ACCOUNTS)
+  address_line_1: String @join__field(graph: ACCOUNTS)
 }
 
 type addAccountResponse
@@ -100,6 +100,7 @@ type Order
 {
   account_id: ID!
   total: Int @join__field(graph: ACCOUNTS, external: true) @join__field(graph: ORDERS)
+  account: Account @join__field(graph: ACCOUNTS, requires: "total")
   id: ID! @join__field(graph: ORDERS)
 }
 

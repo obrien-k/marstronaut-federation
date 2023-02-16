@@ -16,3 +16,7 @@ type Order @key(fields: "id") @key(fields:"account_id") {
   account_id: ID!
   total: Int
 }
+
+extend type Account @key(fields:"id") {
+  id: ID!
+}

@@ -14,14 +14,17 @@ const resolvers = {
   Order: {
     __resolveReference: (reference, { dataSources }) => {
       console.log("[subgraph-orders][Order] reference " + JSON.stringify(reference))
-      return {account_id: reference.id}
+      return {account_id: reference.id, total: reference.total}
     },
     total_sales: (parent) => {
       console.log(JSON.stringify(parent))
       console.log("total sales logged" + JSON.stringify(parent));
       return "total sales";
+    },
+    account: (parent) => {
+      return (parent.account_id);
     }
-  }
+  },
 };
 
 module.exports = resolvers;

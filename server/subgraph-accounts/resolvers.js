@@ -25,7 +25,7 @@ const resolvers = {
       }
       console.log(userId); */
       return context.dataSources.AccountSource.getAccount(id);
- 
+      
     },
     Accounts: async (_, __, {dataSources}) => {
       return dataSources.AccountSource.getAccounts();
@@ -36,16 +36,21 @@ const resolvers = {
       console.log("[subgraph-accounts][Account] reference" + JSON.stringify(reference))
       return reference.id;
     },
+    // @requires from order
+    sales_total: (reference) => {
+      console.log("[subgraph-accounts][Order][total_sales] reference" + JSON.stringify(reference))
+      return (reference.total);
+    }
   },
-  Order: {
+  Orders: {
     __resolveReference: (reference, {dataSources}) => {
       console.log("[subgraph-accounts][Order] reference" + JSON.stringify(reference))
       return {account_id: reference.account_id};
     },
-    total_sales: (reference) => {
-      console.log("[subgraph-accounts][Order][total_sales] reference" + JSON.stringify(reference))
-      return (reference.total);
-    }
+    Account: (root) => {
+      console.log("[subgraph-accounts][Order][Account] parent" + JSON.stringify(root))
+    },
+
   }
 };
 

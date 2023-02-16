@@ -23,7 +23,7 @@ type Account @key(fields: "id") @key(fields: "address_id") {
   id: ID!
   address_id: ID!
   role: String!
-  orders: [Order]
+  orders: Order
   sales_total: Int
 }
 

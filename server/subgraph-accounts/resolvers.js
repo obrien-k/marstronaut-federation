@@ -14,8 +14,9 @@ const resolvers = {
   },
   Query: {
     // returns account A&A
-    Account: async (_, { id }, context) => {
+    Account: async (parent, { id }, context, info) => {
      console.log(context.user);
+     console.log(parent);
      /* if(!context.user) throw new AuthenticationError("authErrMessage");
       if(context.userId == '141592') {
         console.log("yay");
@@ -36,13 +37,18 @@ const resolvers = {
       console.log("[subgraph-accounts][Account] reference" + JSON.stringify(reference))
       return reference.id;
     },
+    orders: (parent) => {
+      console.log("[subggraph-accounts][Account] orders" +JSON.stringify(parent));
+      console.log({account_id: parent.id});
+      return {account_id: parent.id}
+    },
     // @requires from order
     sales_total: (reference) => {
-      console.log("[subgraph-accounts][Order][total_sales] reference" + JSON.stringify(reference))
+      console.log("[subgraph-accounts][Order][sales_total] reference" + JSON.stringify(reference))
       return (reference.total);
     }
   },
-  Orders: {
+ /* Orders: {
     __resolveReference: (reference, {dataSources}) => {
       console.log("[subgraph-accounts][Order] reference" + JSON.stringify(reference))
       return {account_id: reference.account_id};
@@ -51,7 +57,7 @@ const resolvers = {
       console.log("[subgraph-accounts][Order][Account] parent" + JSON.stringify(root))
     },
 
-  }
+  }*/
 };
 
 module.exports = resolvers;

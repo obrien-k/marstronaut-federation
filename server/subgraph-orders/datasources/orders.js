@@ -8,7 +8,7 @@ class OrderSource {
   getOrder(orderId) {
     const ordersFile = fs.readFileSync(__dirname + '/orders.json', {encoding:'utf-8'})
     const parsedFile = JSON.parse(ordersFile);
-    const findOrder = (parsedFile.orders.find(i => i.id == orderId))
+    const findOrder = (parsedFile.Orders.find(i => i.id == orderId))
     return findOrder;
   }
 
@@ -16,7 +16,7 @@ class OrderSource {
     console.log(accountId);
     const ordersFile = fs.readFileSync(__dirname + '/orders.json', {encoding:'utf-8'})
     const parsedFile = JSON.parse(ordersFile);
-    const findOrder = (parsedFile.orders.find(i => i.account_id == accountId))
+    const findOrder = (parsedFile.Orders.find(i => i.account_id == accountId))
     console.log(findOrder);
     return findOrder;
   }

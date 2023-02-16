@@ -12,9 +12,10 @@ const resolvers = {
     }, 
   },
   Order: {
-    __resolveReference: (reference, { dataSources }) => {
+    __resolveReference: async (reference, { dataSources }) => {
       console.log("[subgraph-orders][Order] reference " + JSON.stringify(reference))
-      return {account_id: reference.id, total: reference.total}
+      console.log((reference.account_id))
+      return dataSources.OrderSource.getAccountOrders(reference.account_id);
     },
     total_sales: (parent) => {
       console.log(JSON.stringify(parent))

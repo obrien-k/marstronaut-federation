@@ -25,7 +25,8 @@ type Account
   id: ID!
   address_id: ID! @join__field(graph: ACCOUNTS)
   role: String! @join__field(graph: ACCOUNTS)
-  orders: [Order] @join__field(graph: ACCOUNTS)
+  orders: Order @join__field(graph: ACCOUNTS)
+  sales_total: Int @join__field(graph: ACCOUNTS)
   address_line_1: String @join__field(graph: ACCOUNTS)
 }
 

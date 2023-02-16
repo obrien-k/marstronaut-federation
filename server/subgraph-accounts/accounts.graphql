@@ -16,7 +16,7 @@ type Mutation {
 type Order @key(fields: "account_id") {
   account_id: ID!
   total: Int @external
-  account: Account @requires(fields: "total")
+  account_total_sales: Int @requires(fields:"total")
 }
 
 type Account @key(fields: "id") @key(fields: "address_id") {
@@ -24,7 +24,7 @@ type Account @key(fields: "id") @key(fields: "address_id") {
   address_id: ID!
   role: String!
   orders: Order
-  sales_total: Int
+
 }
 
 extend type Account @key(fields: "address_id") {

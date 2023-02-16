@@ -17,11 +17,6 @@ const resolvers = {
       console.log((reference.account_id))
       return dataSources.OrderSource.getAccountOrders(reference.account_id);
     },
-    total_sales: (parent) => {
-      console.log(JSON.stringify(parent))
-      console.log("total sales logged" + JSON.stringify(parent));
-      return "total sales";
-    },
     account: (parent) => {
       return (parent.account_id);
     }

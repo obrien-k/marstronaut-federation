@@ -42,22 +42,14 @@ const resolvers = {
       console.log({account_id: parent.id});
       return {account_id: parent.id}
     },
-    // @requires from order
-    sales_total: (reference) => {
-      console.log("[subgraph-accounts][Order][sales_total] reference" + JSON.stringify(reference))
-      return (reference.total);
-    }
-  },
- /* Orders: {
-    __resolveReference: (reference, {dataSources}) => {
-      console.log("[subgraph-accounts][Order] reference" + JSON.stringify(reference))
-      return {account_id: reference.account_id};
-    },
-    Account: (root) => {
-      console.log("[subgraph-accounts][Order][Account] parent" + JSON.stringify(root))
-    },
 
-  }*/
+  },
+  Order: {
+    account_total_sales: (parent) => {
+      console.log(JSON.stringify(parent))
+      return (parent.total);
+    },
+  }
 };
 
 module.exports = resolvers;

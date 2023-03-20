@@ -1,9 +1,9 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
 
 class NasaAPI extends RESTDataSource {
   willSendRequest(request) {
-    request.params.set("api_key", process.env.NASA_KEY);
+    request.params.set("api_key", process.env.NASA_API_KEY);
   }
 
   constructor() {

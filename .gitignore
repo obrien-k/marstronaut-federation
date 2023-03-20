@@ -1,3 +1,6 @@
+# Apollo Workbench files
+*.apollo-workbench
+
 # Logs
 logs
 *.log

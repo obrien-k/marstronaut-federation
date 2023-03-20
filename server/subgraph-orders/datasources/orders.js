@@ -1,9 +1,9 @@
-const { orders } = require(__dirname + '/orders.json');
+const { Orders } = require(__dirname + '/orders.json');
 const fs = require('fs');
 
 class OrderSource {
   getOrders() {
-    return orders;
+    return Orders;
   }
   getOrder(orderId) {
     const ordersFile = fs.readFileSync(__dirname + '/orders.json', {encoding:'utf-8'})
@@ -13,7 +13,6 @@ class OrderSource {
   }
 
   getAccountOrders(accountId) {
-    console.log(accountId);
     const ordersFile = fs.readFileSync(__dirname + '/orders.json', {encoding:'utf-8'})
     const parsedFile = JSON.parse(ordersFile);
     const findOrder = (parsedFile.Orders.find(i => i.account_id == accountId))

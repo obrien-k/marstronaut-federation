@@ -15,7 +15,7 @@ type Manifest {
   photo_manifest: Photo_Manifest
 }
 
-type Photo_Manifest {
+type Photo_Manifest @key (fields:"total_photos"){
   "Name of the rover"
   name: String
   "Date when the rover landed on Mars"
@@ -29,12 +29,12 @@ type Photo_Manifest {
   "The most recent Earth date from which photos exist"
   max_date: String
   "Number of photos taken by the rover"
-  total_photos: Int
+  total_photos: ID!
   photos: [Photos!]!
 }
 
-type Photos {
-  sol: Int
+type Photos @key (fields: "sol") {
+  sol: ID!
   earth_date: String
   total_photos: Int
   cameras: [String]

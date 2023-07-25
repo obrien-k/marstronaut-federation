@@ -1,0 +1,94 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+type account {
+  id: ID!
+  role: String!
+}
+type addAccountResponse {
+  code: Int
+  success: Boolean
+  message: String
+  account: account
+}
+"Astronomy photo of the day"
+type Apod {
+  "Image URL"
+  url: String
+  "High definition image URL"
+  hdurl: String
+}
+type Comic {
+  month: String!
+  day: String!
+  year: String!
+  alt: String!
+}
+type Manifest {
+  photo_manifest: Photo_Manifest
+}
+type Mutation {
+  addAccount(id: ID!, role: String!): addAccountResponse!
+}
+type Photo_Details {
+  img_src: String
+  totally: totally
+}
+type Photo_Manifest {
+  "Name of the rover"
+  name: String
+  "Date when the rover landed on Mars"
+  landing_date: String
+  "Date when the rover launched from Earth"
+  launch_date: String
+  "Mission status of the rover"
+  status: String
+  "The most recent Martian sol from which photos exist"
+  max_sol: String
+  "The most recent Earth date from which photos exist"
+  max_date: String
+  "Number of photos taken by the rover"
+  total_photos: Int
+  photos: [Photos!]!
+}
+type Photolist {
+  photos: [Photo_Details]
+}
+type Photos {
+  sol: Int
+  earth_date: String
+  total_photos: Int
+  cameras: [String]
+}
+type Query {
+  "Returns all accounts"
+  accounts: [account]
+  "Find one account based on ID"
+  account(id: ID!): account
+  "Retrieves manifest info based on rover name"
+  Manifest(name: String!): Manifest!
+  "Retrieves photos from a rover for a specific day"
+  Photolist(rover_name: String!, earth_date: String!): Photolist
+  "Retrieves the astronomy photo of the day"
+  Apod: Apod
+  "Retrieves comic info based on comic number"
+  Comic(comic_number: Int!): Comic
+  "totally cool"
+  totally: totally
+}
+type totally {
+  id: ID!
+  cool: Boolean
+}
+"Names of Mars Rovers"
+enum MarsRover {
+  "Deployed in April 2006"
+  Curiosity
+}
+directive @defer(label: String, if: Boolean! = true) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+"Exposes a URL that specifies the behavior of this scalar."
+directive @specifiedBy(
+    "The URL that specifies the behavior of this scalar."
+    url: String!
+  ) on SCALAR

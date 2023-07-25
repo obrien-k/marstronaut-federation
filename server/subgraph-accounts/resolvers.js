@@ -31,6 +31,9 @@ const resolvers = {
     Accounts: async (_, __, {dataSources}) => {
       return dataSources.AccountSource.getAccounts();
     },
+    Issue: async (parent, {id}, context, info) => {
+      return context.dataSources.AccountSource.getIssues();
+    }
   },
   Account: {
     __resolveReference: (reference, {dataSources}) => {

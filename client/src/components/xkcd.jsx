@@ -5,8 +5,8 @@ const comicNumber = Math.floor(Math.random() * (2645 - 1 + 1)) + 1;
 console.log(comicNumber);
 
 const GET_XKCD_COMIC = gql`
-  query xkcd($comicNumber: Int!) {
-    Comic(comic_number: $comicNumber) {
+  query xkcd($comicNumber: Int!, $testKey: String!) {
+    Comic(comic_number: $comicNumber) @connection(key: $testKey){
       month
       day
       year
@@ -17,7 +17,7 @@ const GET_XKCD_COMIC = gql`
 
 function XkcdData() {
   const { loading, error, data } = useQuery(GET_XKCD_COMIC, {
-    variables: { comicNumber },
+    variables: { comicNumber, testKey: "somekey" },
   });
 
   if (loading) return null;

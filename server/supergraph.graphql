@@ -3,7 +3,6 @@ schema
   @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
 {
   query: Query
-  mutation: Mutation
 }
 
 directive @join__field(graph: join__Graph!, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
@@ -29,15 +28,6 @@ type Account
   address_line_1: String @join__field(graph: ACCOUNTS)
 }
 
-type addAccountResponse
-  @join__type(graph: ACCOUNTS)
-{
-  code: Int
-  success: Boolean
-  message: String
-  Account: Account
-}
-
 """Astronomy photo of the day"""
 type Apod
   @join__type(graph: NASA)
@@ -56,6 +46,19 @@ type Comic
   day: String!
   year: String!
   alt: String!
+}
+
+type inputTest
+  @join__type(graph: ORDERS)
+{
+  id: ID
+}
+
+type Issue
+  @join__type(graph: ACCOUNTS)
+{
+  id: ID
+  rule: [Rule]
 }
 
 scalar join__FieldSet
@@ -87,21 +90,13 @@ type Manifest
   photo_manifest: Photo_Manifest
 }
 
-type Mutation
-  @join__type(graph: ACCOUNTS)
-{
-  addAccount(id: ID!, role: String!): addAccountResponse!
-}
-
 type Order
-  @join__type(graph: ACCOUNTS, key: "account_id")
+  @join__type(graph: ACCOUNTS, key: "id")
   @join__type(graph: ORDERS, key: "id")
-  @join__type(graph: ORDERS, key: "account_id")
 {
-  account_id: ID!
+  id: ID!
   total: Int @join__field(graph: ACCOUNTS, external: true) @join__field(graph: ORDERS)
   account_total_sales: Int @join__field(graph: ACCOUNTS, requires: "total")
-  id: ID! @join__field(graph: ORDERS)
 }
 
 type Photo_Details
@@ -114,7 +109,7 @@ type Photo_Details
 }
 
 type Photo_Manifest
-  @join__type(graph: NASA)
+  @join__type(graph: NASA, key: "total_photos")
 {
   """Name of the rover"""
   name: String
@@ -135,7 +130,7 @@ type Photo_Manifest
   max_date: String
 
   """Number of photos taken by the rover"""
-  total_photos: Int
+  total_photos: ID!
   photos: [Photos!]!
 }
 
@@ -146,9 +141,9 @@ type Photolist
 }
 
 type Photos
-  @join__type(graph: NASA)
+  @join__type(graph: NASA, key: "sol")
 {
-  sol: Int
+  sol: ID!
   earth_date: String
   total_photos: Int
   cameras: [String]
@@ -165,6 +160,7 @@ type Query
 
   """Find one Account based on ID"""
   Account(id: ID!): Account @join__field(graph: ACCOUNTS)
+  Issue: Issue @join__field(graph: ACCOUNTS)
 
   """Retrieves manifest info based on rover name"""
   Manifest(name: String!): Manifest! @join__field(graph: NASA)
@@ -184,11 +180,37 @@ type Query
   """Find all orders for an account"""
   AccountOrders(account_id: ID!): [Order] @join__field(graph: ORDERS)
 
+  """test"""
+  inputTestQ(can: String!, I: Int!, Do: String!, It: String!, Like: String!, This: String!, HTL: Boolean!): inputTest @join__field(graph: ORDERS)
+
   """Retrieves comic info based on comic number"""
   Comic(comic_number: Int!): Comic @join__field(graph: XKCD)
 
   """totally cool"""
   totally: totally @join__field(graph: XKCD)
+}
+
+interface Rule
+  @join__type(graph: ACCOUNTS)
+{
+  id: ID!
+  name: String
+}
+
+type RuleA implements Rule
+  @join__implements(graph: ACCOUNTS, interface: "Rule")
+  @join__type(graph: ACCOUNTS)
+{
+  id: ID!
+  name: String
+}
+
+type RuleB implements Rule
+  @join__implements(graph: ACCOUNTS, interface: "Rule")
+  @join__type(graph: ACCOUNTS)
+{
+  id: ID!
+  name: String
 }
 
 type totally

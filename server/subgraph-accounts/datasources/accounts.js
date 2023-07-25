@@ -1,4 +1,5 @@
 const { Accounts } = require(__dirname + '/accounts.json');
+const { Issues } = require(__dirname + '/issues.json');
 const fs = require('fs');
 
 class AccountSource {
@@ -28,6 +29,9 @@ class AccountSource {
     const findAccount = (parsedFile.accounts.find(i => i.id == accountId))
     console.log(findAccount + 'findAccount returning undefined first attempt')
     return findAccount;
+  }
+  getIssues() {
+    return Issues;
   }
 }
 

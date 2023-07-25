@@ -4,3 +4,24 @@ supergraph:
   # The socket address and port to listen on
   listen: 0.0.0.0:4000
   introspection: true
+include_subgraph_errors:
+  all: true # Propagate errors from all subgraphs
+headers:
+  all:
+    request:
+      - propagate:
+          matching: '.*'
+      - insert:
+          name: 'apollo-router-log-request'
+          value: 'my_client'
+telemetry:
+  experimental_logging:
+    format: json # By default it's "pretty" if you are in an interactive shell session
+    display_filename: true # Display filename where the log is coming from. Default: true
+    display_line_number: false # Display line number in the file where the log is coming from. Default: true
+    # If one of these headers matches we will log supergraph and subgraphs requests/responses
+    when_header:
+      - name: apollo-router-log-request
+        value: my_client
+        headers: true # default: false
+        body: true # default: false

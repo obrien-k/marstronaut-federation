@@ -7,14 +7,11 @@ type Query {
   Accounts: [Account]
   "Find one Account based on ID"
   Account(id: ID!): Account
+  Issue: Issue
 }
 
-type Mutation {
-  addAccount (id: ID!, role: String!): addAccountResponse!
-}
-
-type Order @key(fields: "account_id") {
-  account_id: ID!
+type Order @key(fields: "id") {
+  id: ID!
   total: Int @external
   account_total_sales: Int @requires(fields:"total")
 }
@@ -31,10 +28,22 @@ extend type Account @key(fields: "address_id") {
   address_line_1: String
 }
 
-type addAccountResponse {
-  code: Int
-  success: Boolean
-  message: String
-  Account: Account
+interface Rule  {
+  id: ID!
+  name: String
 }
 
+type RuleA implements Rule {
+  id: ID!
+  name: String
+}
+
+type RuleB implements Rule {
+  id: ID!
+  name: String
+}
+
+type Issue {
+  id: ID
+  rule: [Rule]
+}

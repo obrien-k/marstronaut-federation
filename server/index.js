@@ -28,9 +28,15 @@ const server = new ApolloServer({
   // Subscriptions are not currently supported in Apollo Federation
   subscriptions: false,
   context: async ({req}) => {
+    const faker = req.headers.faker || '';
+    if(faker) {
+      console.log(faker);
+      return {faker};
+    }
     const token = req.headers.authorization || ''; // e.g., "Bearer user-1"
     // Get the user token after "Bearer "
     const id = token.split(' ')[1]; // e.g., "user-1"
+    console.log(id);
     if (id) { // clean this up, assign userId to a var and start using real data
       return {user: {userId: id, userRole:"test"}}
     }

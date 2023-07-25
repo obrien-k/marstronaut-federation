@@ -30,8 +30,9 @@
     "apollo-server": "^3.11.1",
     "axios": "^0.27.2",
     "concurrently": "^7.3.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
-    "graphql": "^16.5.0",
+    "graphql": "^16.6.0",
     "moment": "^2.29.4"
   },
   "devDependencies": {

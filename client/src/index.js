@@ -5,9 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        Comic: {
+          keyArgs: (args, { typename, field, fieldName, variables }) => {
+           return variables.testKey
+          },
+        },
+      },
+    },
+  },
+})
+
 const client = new ApolloClient({
   uri: 'https://marstronaut-server.fly.dev',
-  cache: new InMemoryCache(),
+  cache: cache
 });
 
 document.body.style = 'background: #333;';

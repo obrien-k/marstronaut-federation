@@ -9,14 +9,19 @@ type Query {
   Order(id: ID!): Order
   "Find all orders for an account"
   AccountOrders(account_id: ID!): [Order]
+  "test"
+  inputTestQ (can: String!, I: Int!, Do: String!, It: String!, Like: String!, This: String!, HTL: Boolean!): inputTest
 }
 
-type Order @key(fields: "id") @key(fields:"account_id") {
+type Order @key(fields:"id") {
   id: ID!
-  account_id: ID!
   total: Int
 }
 
 extend type Account @key(fields:"id") {
   id: ID!
+}
+
+type inputTest {
+  id: ID
 }

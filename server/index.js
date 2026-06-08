@@ -2,11 +2,6 @@ require('dotenv').config()
 const { ApolloServer } = require('apollo-server');
 const { ApolloGateway, IntrospectAndCompose, RemoteGraphQLDataSource } = require('@apollo/gateway');
 
-/*
- * Subgraphs are introspected and composed at startup — no rover CLI or
- * pre-composed supergraph.graphql required.  Set the *_SUBGRAPH_URL env
- * vars to point at remote instances for production.
- */
 const subgraphs = [
   { name: 'accounts', url: process.env.ACCOUNTS_SUBGRAPH_URL || 'http://localhost:4003' },
   { name: 'nasa',     url: process.env.NASA_SUBGRAPH_URL     || 'http://localhost:4001' },
@@ -15,8 +10,12 @@ const subgraphs = [
 
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
   willSendRequest({ request, context }) {
-    request.http.headers.set('userId',   context.user.userId);
-    request.http.headers.set('userRole', context.user.userRole);
+    // context.user is undefined during startup introspection; only set headers
+    // when forwarding an actual client request.
+    if (context.user) {
+      request.http.headers.set('userId',   context.user.userId);
+      request.http.headers.set('userRole', context.user.userRole);
+    }
     request.http.headers.set('apollo-federation-include-trace', 'ftv1');
     request.http.headers.set('Access-Control-Expose-Headers', '*');
   }
